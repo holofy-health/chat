@@ -12,7 +12,9 @@ use Musonza\Chat\Http\Requests\StoreConversation;
 use Musonza\Chat\Http\Requests\UpdateConversation;
 use Musonza\Chat\Models\Conversation;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenApi;
 
+#[OpenApi\PathItem]
 class ConversationController extends Controller
 {
     protected $conversationTransformer;
@@ -38,6 +40,12 @@ class ConversationController extends Controller
         return response($conversation);
     }
 
+    /**
+     * List Conversations
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse|Response
+     */
+    #[OpenApi\Operation(tags: ['Conversations'])]
     public function index()
     {
         $conversations = Chat::conversations()->conversation->all();
@@ -52,6 +60,13 @@ class ConversationController extends Controller
         return response($conversations);
     }
 
+    /**
+     * Store Conversation
+     *
+     * @param  StoreConversation  $request
+     * @return \Illuminate\Contracts\Foundation\Application|ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse|Response
+     */
+    #[OpenApi\Operation(tags: ['Conversations'])]
     public function store(StoreConversation $request)
     {
         $participants = $request->participants();
@@ -60,6 +75,14 @@ class ConversationController extends Controller
         return $this->itemResponse($conversation);
     }
 
+    /**
+     * Show Conversation
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse|Response
+     */
+    #[OpenApi\Operation(tags: ['Conversations'])]
+
     public function show($id)
     {
         $conversation = Chat::conversations()->getById($id);
@@ -67,6 +90,13 @@ class ConversationController extends Controller
         return $this->itemResponse($conversation);
     }
 
+    /**
+     * @param UpdateConversation $request
+     * @param $id
+     *
+     * @return ResponseFactory|Response
+     */
+    #[OpenApi\Operation(tags: ['Conversations'])]
     public function update(UpdateConversation $request, $id)
     {
         /** @var Conversation $conversation */
@@ -84,6 +114,7 @@ class ConversationController extends Controller
      *
      * @return ResponseFactory|Response
      */
+    #[OpenApi\Operation(tags: ['Conversations'])]
     public function destroy(DestroyConversation $request, $id): Response
     {
         /** @var Conversation $conversation */
