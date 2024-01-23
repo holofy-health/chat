@@ -20,8 +20,7 @@ class ListMessageParameters extends ParametersFactory
                 ->required(),
             Parameter::query()
                 ->name('participant_type')
-                ->description('Participant type')
-                ->required(),
+                ->description('Participant type'),
             Parameter::query()
                 ->name('page')
                 ->description('Page number'),

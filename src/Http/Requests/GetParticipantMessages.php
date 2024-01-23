@@ -26,7 +26,7 @@ class GetParticipantMessages extends BaseRequest
     {
         return [
             'participant_id'   => 'required',
-            'participant_type' => 'required',
+            'participant_type' => 'optional',
             'page'             => 'integer',
             'perPage'          => 'integer',
             'sorting'          => 'string|in:asc,desc',

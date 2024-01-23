@@ -2,6 +2,7 @@
 
 namespace Musonza\Chat\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreConversation extends FormRequest
@@ -16,7 +17,7 @@ class StoreConversation extends FormRequest
         return [
             'participants'        => 'array',
             'participants.*.id'   => 'required',
-            'participants.*.type' => 'required|string',
+            'participants.*.type' => 'optional|string',
             'data'                => 'array',
         ];
     }
@@ -25,9 +26,8 @@ class StoreConversation extends FormRequest
     {
         $participantModels = [];
         $participants = $this->input('participants', []);
-
         foreach ($participants as $participant) {
-            $participantModels[] = app($participant['type'])->find($participant['id']);
+            $participantModels[] = app(User::class)->find($participant['id']);
         }
 
         return $participantModels;
