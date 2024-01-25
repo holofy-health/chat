@@ -13,7 +13,7 @@ class ClearConversation extends BaseRequest
     {
         return [
             'participant_id'   => 'required',
-            'participant_type' => 'required|string',
+            'participant_type' => 'nullable|string',
         ];
     }
 }

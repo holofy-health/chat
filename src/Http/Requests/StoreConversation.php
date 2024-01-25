@@ -17,7 +17,7 @@ class StoreConversation extends FormRequest
         return [
             'participants'        => 'array',
             'participants.*.id'   => 'required',
-            'participants.*.type' => 'optional|string',
+            'participants.*.type' => 'nullable|string',
             'data'                => 'array',
         ];
     }

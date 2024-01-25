@@ -13,7 +13,7 @@ class StoreMessage extends BaseRequest
     {
         return [
             'participant_id'   => 'required',
-            'participant_type' => 'optional|string',
+            'participant_type' => 'nullable|string',
             'message'          => 'required|array',
             'message.body'     => 'required',
         ];

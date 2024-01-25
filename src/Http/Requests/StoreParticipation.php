@@ -16,7 +16,7 @@ class StoreParticipation extends FormRequest
         return [
             'participants'        => 'required|array',
             'participants.*.id'   => 'required',
-            'participants.*.type' => 'required|string',
+            'participants.*.type' => 'nullable|string',
         ];
     }
 
